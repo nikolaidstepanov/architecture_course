@@ -1,0 +1,30 @@
+.login-box {
+    padding: 1vmin;
+    width: 50vmin;
+}
+
+.login-box div {
+    padding-left: 1vmin;
+    padding-right: 1vmin;
+    text-align: left;
+}
+
+.login-box div.caption {
+    margin-top: 1vmin;
+}
+
+.login-box div.control {
+    padding-right: 1vmin;
+}
+
+.login-box div.control input {
+    width: 100%;
+}
+
+.login-box div.actions button {
+    width: 100px;
+}
+
+.login-box div.actions {
+    margin-top: 1vmin;
+}

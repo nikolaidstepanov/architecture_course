@@ -1,0 +1,12 @@
+.task-list {
+    text-align: left;
+    width: 50vmin;
+}
+
+.task-list h3 {
+    text-align: center;
+}
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
