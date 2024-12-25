@@ -1,0 +1,20 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Context Diagram for "Теплый дом" (AS IS)
+
+Person(user, "Пользователь", "Пользователь системы 'Теплый дом'")
+Person(technician, "Специалист по установке датчика", "Выполняет настройку и подключение датчика")
+
+System_Boundary(home_system, "Теплый дом") {
+    System(control_module, "Модуль управления и мониторинга", "Позволяет регулировать отопление и проверять температуру в доме")
+}
+
+System_Ext(sensor, "Датчик", "Датчик установленный у пользователя. Отвечает за регулирование и передачу данных.")
+
+Rel(user, control_module, "Управляет отоплением и мониторит температуру", "REST API")
+Rel(control_module, sensor, "Обмен данными", "JSON/HTTP")
+Rel(technician, sensor, "Настройка и установка")
+@enduml

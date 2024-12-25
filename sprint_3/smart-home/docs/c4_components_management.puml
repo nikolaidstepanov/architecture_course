@@ -1,0 +1,41 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component diagram for Device Management System
+
+Container(api_gateway, "API Gateway", "Container: Nginx", "Handles requests from users and producers. Manages authentication and routing.")
+Container_Boundary(device_management, "Device Management [Container]") {
+    Component(device_control, "Control", "Component: Java", "Manages direct interaction with devices and logs.")
+    Component(scenarios, "Scenarios", "Component: Java", "Handles user-defined scenarios for devices.")
+    Component(integration, "Integration", "Component: Java", "Manages the addition, deletion, and update of user devices.")
+}
+
+ContainerQueue(data_bus_logs, "Data Bus (Logs)", "Container: Apache Kafka", "Handles logging of user actions and changes in device management.")
+ContainerQueue(data_bus_integration, "Data Bus (Integration)", "Container: Apache Kafka", "Handles requests for adding, updating, or deleting devices from users.")
+ContainerDb(log_db, "Log Database", "Container: Clickhouse", "Stores logs of user actions and changes for analytics and troubleshooting.")
+
+Container(user_portal, "User Portal", "Container: Java", "Manages user registrations, scenarios, and available devices.")
+Container(monitoring_analytics, "Monitoring and Analytics", "Container: Java", "Collects data and provides analytics to the user.")
+Container(new_device_service, "New Device Integration Service", "Container: Java", "Handles integration requests for new devices.")
+Container_Ext(device, "Device", "Software System", "Represents the user's purchased device.")
+
+' Relationships
+Rel(api_gateway, device_control, "Handles user requests to manage devices", "gRPC")
+Rel(api_gateway, data_bus_integration, "Sends device integration requests", "gRPC")
+Rel(data_bus_integration, integration, "Processes integration requests for adding, updating, or deleting devices", "Pub/Sub")
+Rel(api_gateway, scenarios, "Sends scenario management requests", "gRPC")
+Rel(integration, new_device_service, "Requests information about devices", "gRPC")
+Rel(integration, monitoring_analytics, "Sends information about new devices for analytics", "gRPC")
+Rel(scenarios, user_portal, "Request information about users's scenarios to the user portal", "gRPC")
+Rel(integration, user_portal, "Adds/update/delete information about new devices to the user portal", "gRPC")
+Rel(scenarios, integration, "Fetches device information for scenarios", "gRPC")
+
+Rel(device_control, data_bus_logs, "Sends logs to Data Bus", "gRPC")
+Rel(data_bus_logs, log_db, "Stores logs for analytics and troubleshooting", "gRPC")
+Rel(device_control, scenarios, "Fetch scenario details to Control Service", "gRPC")
+Rel(device_control, integration, "Fetch integration data to Control Service", "gRPC")
+Rel(device_control, device, "Receives data and sends commands", "gRPC")
+
+@enduml

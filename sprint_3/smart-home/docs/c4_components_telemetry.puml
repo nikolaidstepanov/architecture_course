@@ -1,0 +1,24 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component diagram for Telemetry System
+
+System_Ext(device, "Device", "Software System", "The user's purchased device.")
+
+Container_Boundary(telemetry, "Telemetry [Container]") {
+    Component(web, "Web", "Component: Java", "Handles telemetry data collection from the device via HTTP/gRPC.")
+    Component(pipe, "Pipe", "Component: Java", "Handles telemetry data collection via MQTT/CoAP bridge.")
+}
+
+ContainerQueue(mqtt_data_bus, "Data Bus (MQTT/CoAP)", "Container: MQTT/CoAP", "Acts as a bridge between devices and the company's Kafka.")
+ContainerQueue(data_bus, "Data Bus (Apache Kafka)", "Container: Apache Kafka", "Stores telemetry data collected from user devices.")
+
+Rel(device, mqtt_data_bus, "Sends telemetry data via MQTT/CoAP", "MQTT/CoAP")
+Rel(mqtt_data_bus, pipe, "Forwards telemetry data")
+Rel(device, web, "Sends telemetry data via HTTP/gRPC", "HTTP/gRPC")
+Rel(web, data_bus, "Forwards telemetry data")
+Rel(pipe, data_bus, "Forwards telemetry data")
+
+@enduml

@@ -1,0 +1,94 @@
+@startuml
+
+' Описание класса User
+class User {
+  + Int UserId
+  + List<Device> devices
+  + List<Scenario> scenarios
+  + List<Report> reports
+  + List<Alert> alerts
+  + Int RoleId
+  + create_user()
+  + get_user()
+  + update_user()
+  + delete_user()
+  + get_device()
+  + put_device()
+  + get_scenario()
+  + put_scenario()
+}
+
+' Описание класса Device
+class Device {
+  + Int DeviceId
+  + String Description
+  + JSON Config
+  + Int Status
+  + Int SupplierId
+  + List<Rule> actions
+  + get_device_config()
+  + validate_config()
+  + get_device_description()
+  + get_available_actions()
+  + do_action()
+  + check_device()
+  + delete_device()
+  + update_device()
+}
+
+' Описание класса Scenario
+class Scenario {
+  + Int ScenarioId
+  + LinkedList<Rule> rules
+  + Int Priority
+  + String Schedule
+  + create_scenario()
+  + update_scenario()
+  + delete_scenario()
+}
+
+' Описание класса Rule
+class Rule {
+  + Int ActionId
+  + get_rule()
+  + delete_rule()
+}
+
+' Описание класса Alert
+class Alert {
+  + Int AlertId
+  + Int DeviceId
+  + Int UserId
+  + Timestamp AlertDate
+  + generate_alert()
+  + send_alert()
+  + delete_alert()
+}
+
+' Описание класса Report
+class Report {
+  + Int ReportId
+  + Int UserId
+  + String Report_url
+  + create_report()
+  + get_report()
+}
+
+' Описание класса Stats
+class Stats {
+  + Int StatsId
+  + Float StatsValue
+  + calculate_stats()
+}
+
+' Связи между классами
+User "1" *-- "0..*" Device : owns
+User "1" *-- "0..*" Scenario : manages
+User "1" *-- "0..*" Alert : receives
+User "1" *-- "0..*" Report : generates
+Scenario "1" o-- "0..*" Rule : contains
+Device "1" o-- "0..*" Rule : follows
+Alert "1" --> "1" Device : refers
+Report "1" o-- "0..*" Stats : contains
+
+@enduml

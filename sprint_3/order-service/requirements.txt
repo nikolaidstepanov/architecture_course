@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+# Add other dependencies here
+psycopg2-binary
+flask
+flask_sqlalchemy

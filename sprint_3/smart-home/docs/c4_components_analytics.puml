@@ -1,0 +1,32 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Component diagram for Monitoring and Analytics System
+
+Person(user, "User", "Person", "User of the 'Smart Home' system.")
+
+ContainerQueue(user_data_bus, "Data Bus (User Requests)", "Container: Apache Kafka", "Handles user requests for analytics.")
+ContainerQueue(telemetry_data_bus, "Data Bus (Telemetry)", "Container: Apache Kafka", "Stores telemetry information from various user devices.")
+ContainerQueue(notifications_data_bus, "Data Bus (Notifications)", "Container: Apache Kafka", "Stores information about critical system notifications.")
+
+Container_Boundary(monitoring_analytics, "Monitoring and Analytics [Container]") {
+    Component(online_monitoring, "Online Monitoring", "Component: Java", "Provides real-time telemetry content from devices to the user.")
+    Component(analytics, "Analytics", "Component: Java", "Prepares analytics for the user based on telemetry data.")
+    Component(alerting, "Alerting", "Component: Java", "Monitors critical cases and analyzes real-time device behavior.")
+}
+
+ContainerDb(database, "Database", "Container: Clickhouse", "Stores telemetry information from various user devices.")
+Container(device_management, "Device Management", "Container: Java", "Handles addition, removal, and management of user devices in real-time.")
+
+Rel(user, online_monitoring, "Views telemetry in real-time", "WebSocket")
+Rel(user_data_bus, analytics, "Forwards user requests for analytics", "Pub/Sub")
+Rel(device_management, analytics, "Sends device-related updates", "gRPC")
+
+Rel(online_monitoring, telemetry_data_bus, "Sends telemetry data")
+Rel(analytics, database, "Fetches data for detailed analytics")
+Rel(alerting, database, "Reads data for critical case analysis")
+Rel(alerting, notifications_data_bus, "Sends notifications about critical cases")
+Rel(telemetry_data_bus, database, "Exports telemetry data to the database", "ETL Process")
+@enduml

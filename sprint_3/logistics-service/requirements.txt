@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+flask_sqlalchemy
+psycopg2-binary

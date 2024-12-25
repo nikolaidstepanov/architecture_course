@@ -1,0 +1,140 @@
+@startuml
+skinparam monochrome true
+skinparam linetype ortho
+hide circle
+
+title Enhanced ER Diagram for Smart Home System
+
+entity User {
+  * UserId : Integer
+  ---
+  Name : String
+  Email : String
+  RoleId : Integer
+  ScenarioId : Integer
+  ReportId : Integer
+}
+
+entity Role {
+  * RoleId : Integer
+  ---
+  RoleName : String
+  Permissions : JSON
+}
+
+entity Home {
+  * HomeId : Integer
+  ---
+  Address : String
+}
+
+entity UserHome {
+  * UserHomeId : Integer
+  ---
+  UserId : Integer
+  HomeId : Integer
+  OwnershipType : String
+  AccessLevel : String
+}
+
+entity Device {
+  * DeviceId : Integer
+  ---
+  Description : String
+  Config : JSON
+  Status : Integer
+  ProducerId : Integer
+  DeviceType : String
+}
+
+entity Scenario {
+  * ScenarioId : Integer
+  ---
+  HomeId : Integer
+  Schedule : String
+  Priority : Integer
+  Performance : JSON
+}
+
+entity Rule {
+  * RuleId : Integer
+  ---
+  ScenarioId : Integer
+  DeviceId : Integer
+  Action : String
+  Status : String
+}
+
+entity Report {
+  * ReportId : Integer
+  ---
+  UserId : Integer
+  StatsId : Integer
+  ReportUrl : String
+  AlertMessage : String
+  AlertDate : Timestamp
+}
+
+entity Stats {
+  * StatsId : Integer
+  ---
+  DeviceId : Integer
+  UserId : Integer
+  Timestamp : Timestamp
+  Metric : JSON
+  Description : String
+}
+
+entity Producer {
+  * ProducerId : Integer
+  ---
+  Name : String
+  Country : String
+  ContactEmail : String
+  IsCertified : Boolean
+}
+
+entity IntegrationLog {
+  * LogId : Integer
+  ---
+  ProducerId : Integer
+  DeviceId : Integer
+  IntegrationDate : Timestamp
+  Status : String
+}
+
+entity UserLog {
+  * LogId : Integer
+  ---
+  UserId : Integer
+  ActionId : Integer
+  Timestamp : Timestamp
+  IPAddress : String
+  UserAgent : String
+}
+
+entity ActionMapping {
+  * ActionId : Integer
+  ---
+  Description : String
+}
+
+' Relationships
+User ||--|| Role : "RoleId"
+User ||--o{ Scenario : "UserId"
+User ||--o{ Report : "UserId"
+User ||--o{ UserLog : "UserId"
+Home ||--o{ Scenario : "HomeId"
+Home ||--o{ Device : "HomeId"
+Device ||--|| Producer : "ProducerId"
+Device ||--o{ Rule : "DeviceId"
+Device ||--o{ Stats : "DeviceId"
+Scenario ||--o{ Rule : "ScenarioId"
+Producer ||--o{ IntegrationLog : "ProducerId"
+Device ||--o{ IntegrationLog : "DeviceId"
+Report ||--|| Stats : "StatsId"
+UserLog ||--|| ActionMapping : "ActionId"
+User ||--o{ UserHome : "UserId"
+Home ||--o{ UserHome : "HomeId"
+
+@enduml
