@@ -265,3 +265,11 @@ sketch
 
 # Draw.io backups
 *.drawio.bkp*
+
+# Terraform
+*.terraform
+.terraform.lock.hcl
+*.tfstate
+*.terraform.tfstate
+*.tfstate.backup
+terraform.tfvars
