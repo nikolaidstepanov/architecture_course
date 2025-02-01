@@ -1,0 +1,35 @@
+type Document {
+  id: ID!
+  type: String
+  number: String
+  issueDate: String
+  expiryDate: String
+}
+
+type Relative {
+  id: ID!
+  relationType: String
+  name: String
+  age: Int
+}
+
+type Client {
+  id: ID!
+  name: String
+  age: Int
+  documents: [Document]
+  relatives: [Relative]
+}
+
+type Query {
+  # Основной запрос для получения клиента по ID
+  # При желании можно запрашивать "documents" и "relatives" 
+  # внутри "client", если они нужны
+  client(id: ID!): Client
+}
+
+type Mutation {
+  createClient(name: String!, age: Int!): Client
+  updateClient(id: ID!, name: String, age: Int): Client
+  # можно добавлять и другие мутации
+}
