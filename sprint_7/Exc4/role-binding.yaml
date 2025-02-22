@@ -1,0 +1,61 @@
+# Security-admin binding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: security-admin-binding
+  namespace: development
+subjects:
+  - kind: User
+    name: secadmin
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: security-admin
+  apiGroup: rbac.authorization.k8s.io
+---
+# DevOps+Ops binding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devops-ops-engineer-binding
+  namespace: development
+subjects:
+  - kind: User
+    name: devops
+    apiGroup: rbac.authorization.k8s.io
+  - kind: User
+    name: opsuser
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: devops-ops-engineer
+  apiGroup: rbac.authorization.k8s.io
+---
+# Developer binding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-binding
+  namespace: development
+subjects:
+  - kind: User
+    name: developer
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io
+---
+# Cluster-readonly binding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-readonly-binding
+subjects:
+  - kind: User
+    name: clusterviewer
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-readonly
+  apiGroup: rbac.authorization.k8s.io

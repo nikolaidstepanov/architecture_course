@@ -264,7 +264,7 @@ sketch
 # End of https://www.toptal.com/developers/gitignore/api/node,react,visualstudiocode,jetbrains+all
 
 # Draw.io backups
-*.drawio.bkp*
+*.bkp*
 
 # Terraform
 *.terraform
