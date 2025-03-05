@@ -273,3 +273,9 @@ sketch
 *.terraform.tfstate
 *.tfstate.backup
 terraform.tfvars
+
+postgres-keycloak-data
+2024__yandex-architecture-sso.code-workspace
+.DS_Store
+.idea
+__pycache__
