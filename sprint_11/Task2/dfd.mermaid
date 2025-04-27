@@ -1,0 +1,65 @@
+flowchart TB
+  %% ---------- STYLE DEFS ----------
+  subgraph " "
+  classDef ext     fill:#f9d9d9,stroke:#aa6666,stroke-width:1;
+  classDef proc    fill:#ffe9d9,stroke:#cc7a00,stroke-width:1;
+  classDef store   fill:#fffbe6,stroke:#7a7a7a,stroke-width:1;
+  classDef consumer fill:#d7e8ff,stroke:#4682b4;
+
+  %% ---------- EXTERNAL ENTITIES ----------
+  Patients((Patients))
+  Clinics((Clinics))
+  Fintech((FinTech))
+  Pharma((Pharma))
+  Electronics((Electronics))
+  AIServices((AI Services))
+  class Patients,Clinics,Fintech,Pharma,Electronics,AIServices ext
+  end
+  %% ---------- PROCESSES ----------
+  Ingest{{Ingest / Streaming}}
+  StdVal{{Standardise & Validate}}
+  DQ{{Data Quality Checks}}
+  Govern{{Governance & Metadata}}
+  ServeBI{{Self-Service BI}}
+  ServeML{{Feature Store}}
+  class Ingest,StdVal,DQ,Govern,ServeBI,ServeML proc
+
+  %% ---------- DATA STORES ----------
+  Raw[["Bronze / Raw Zone"]]
+  Curated[["Silver / Curated Zone"]]
+  Lakehouse[["Data Lakehouse"]]
+  Marts[["Gold / Data Marts"]]
+  Catalog[["Metadata Catalog"]]
+  class Raw,Curated,Lakehouse,Marts,Catalog store
+
+  %% ---------- CONSUMERS ----------
+  BIUsers((BI Users))
+  MLEngineers((ML Engineers))
+  class BIUsers,MLEngineers consumer
+
+  %% ---------- FLOWS ----------
+  Patients -->|medical docs & payments| Ingest
+  Clinics  --> Ingest
+  Fintech  --> Ingest
+  Pharma   --> Ingest
+  Electronics --> Ingest
+  AIServices  --> Ingest
+
+  Ingest --> Raw
+  Raw    --> StdVal
+  StdVal --> Curated
+  Curated --> DQ
+  DQ --> Lakehouse
+  Lakehouse --> Marts
+  Lakehouse --> ServeML
+  Marts --> ServeBI
+
+  %% Governance feedback loop
+  Ingest --> Govern
+  Govern --> Catalog
+  Catalog -.-> ServeBI
+  Catalog -.-> ServeML
+
+  %% Consumers
+  ServeBI --> BIUsers
+  ServeML --> MLEngineers

@@ -1,0 +1,149 @@
+{
+  "releases": [
+    "2024-12-27",
+    "2024-12-28",
+    "2024-12-29",
+    "2024-12-30"
+  ],
+  "tags": [
+    "new"
+  ],
+  "items": [
+    {
+      "id": "airflow",
+      "release": "2024-12-28",
+      "title": "Airflow",
+      "ring": "adopt",
+      "quadrant": "tools",
+      "body": "<p>Airflow</p>\n<p><img src=\"/images/logo.svg\" alt=\"stub\"></p>\n",
+      "featured": true,
+      "flag": "default",
+      "tags": [
+        "new"
+      ],
+      "position": [
+        450,
+        423
+      ]
+    },
+    {
+      "id": "datahub",
+      "release": "2024-12-29",
+      "title": "Data Hub",
+      "ring": "adopt",
+      "quadrant": "tools",
+      "body": "<p>Data Hub</p>\n<p><img src=\"/images/logo.svg\" alt=\"stub\"></p>\n",
+      "featured": true,
+      "flag": "default",
+      "tags": [
+        "new"
+      ],
+      "position": [
+        502,
+        516
+      ]
+    },
+    {
+      "id": "datalake",
+      "release": "2024-12-30",
+      "title": "Data Lake",
+      "ring": "adopt",
+      "quadrant": "platforms-and-operations",
+      "body": "<p>Data Lake</p>\n<p><img src=\"/images/logo.svg\" alt=\"stub\"></p>\n",
+      "featured": true,
+      "flag": "new",
+      "tags": [
+        "new"
+      ],
+      "position": [
+        302,
+        499
+      ]
+    },
+    {
+      "id": "datamesh",
+      "release": "2024-12-27",
+      "title": "Data Mesh",
+      "ring": "adopt",
+      "quadrant": "methods-and-patterns",
+      "body": "<p>Data Mesh</p>\n<p><img src=\"/images/logo.svg\" alt=\"stub\"></p>\n<p><a href=\"/adr/datamesh.md\">ADR</a></p>\n",
+      "featured": true,
+      "flag": "default",
+      "tags": [
+        "new"
+      ],
+      "position": [
+        488,
+        252
+      ]
+    },
+    {
+      "id": "Drimeo",
+      "release": "2024-12-30",
+      "title": "Drimeo",
+      "ring": "adopt",
+      "quadrant": "tools",
+      "body": "<p>Drimeo</p>\n",
+      "featured": true,
+      "flag": "new",
+      "tags": [
+        "new"
+      ],
+      "position": [
+        497,
+        436
+      ]
+    },
+    {
+      "id": "datawarehouse",
+      "release": "2024-12-28",
+      "title": "DWH",
+      "ring": "adopt",
+      "quadrant": "platforms-and-operations",
+      "body": "<p>DWH</p>\n",
+      "featured": true,
+      "flag": "default",
+      "tags": [
+        "new"
+      ],
+      "position": [
+        234,
+        464
+      ]
+    },
+    {
+      "id": "datalakehouse",
+      "release": "2024-12-27",
+      "title": "Iceberg",
+      "ring": "adopt",
+      "quadrant": "platforms-and-operations",
+      "body": "<p>Apache Iceberg</p>\n",
+      "featured": true,
+      "flag": "default",
+      "tags": [
+        "new"
+      ],
+      "position": [
+        317,
+        546
+      ]
+    },
+    {
+      "id": "techradar",
+      "release": "2024-12-29",
+      "title": "Technical radar",
+      "ring": "adopt",
+      "quadrant": "methods-and-patterns",
+      "body": "<p>Technical radar</p>\n",
+      "featured": true,
+      "flag": "default",
+      "tags": [
+        "new"
+      ],
+      "position": [
+        437,
+        303
+      ]
+    }
+  ]
+}
